@@ -5,5 +5,11 @@
     <string name="text_favourite_section">Favourite</string>
 
     <string name="main_text_translate">Translate…</string>
+    <string name="main_text_no_translation_history">No translation history</string>
+    <string name="main_text_no_translation_found">No translation found</string>
+    <string name="main_text_error">Searching error</string>
+
+    <string name="favourite_text_your_favourite_translations">Favourite translations</string>
+    <string name="favourite_text_there_are_no_favourite_translations">There are no favourite translations</string>
 
 </resources>

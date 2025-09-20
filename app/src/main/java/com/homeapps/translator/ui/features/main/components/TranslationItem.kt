@@ -1,6 +1,7 @@
 package com.homeapps.translator.ui.features.main.components
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -29,10 +30,12 @@ fun TranslationItem(
             text = translation.word,
             modifier = Modifier.weight(0.3f)
         )
+        Spacer(modifier = Modifier.weight(0.05f))
         Text(
             text = translation.translation,
             modifier = Modifier.weight(0.3f)
         )
+        Spacer(modifier = Modifier.weight(0.05f))
         IconButton(onClick = { onFavouriteChange(!translation.favourite) }) {
             Icon(
                 painter =
@@ -43,7 +46,7 @@ fun TranslationItem(
                 contentDescription = null,
                 modifier = Modifier
                     .size(30.dp)
-                    .weight(0.2f)
+                    .weight(0.15f)
             )
         }
         IconButton(onClick = onDelete) {
@@ -52,7 +55,7 @@ fun TranslationItem(
                 contentDescription = null,
                 modifier = Modifier
                     .size(45.dp)
-                    .weight(0.2f)
+                    .weight(0.15f)
             )
         }
     }

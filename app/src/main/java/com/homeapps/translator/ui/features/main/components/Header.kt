@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -17,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.homeapps.translator.R
@@ -25,7 +28,7 @@ import com.homeapps.translator.R
 fun Header(
     query: String,
     onQueryChange: (String) -> Unit,
-    translateVisible: Boolean,
+    translateEnabled: Boolean,
     onTranslate: () -> Unit,
 ) {
     Row(
@@ -49,16 +52,23 @@ fun Header(
                     }
                 }
             },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Search
+            ),
+            keyboardActions = KeyboardActions(
+                onSearch = { onTranslate() }
+            ),
+            enabled = translateEnabled,
             modifier = Modifier.weight(0.8f)
         )
 
-        if (translateVisible) {
+        if (translateEnabled) {
             IconButton(
                 onClick = onTranslate,
                 modifier = Modifier.weight(0.2f)
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_arrow_right),
+                    painter = painterResource(R.drawable.ic_search),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(45.dp)

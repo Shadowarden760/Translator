@@ -1,7 +1,5 @@
 package com.homeapps.translator.ui.features.main
 
-import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.homeapps.translator.data.TranslationRepository
@@ -17,20 +15,25 @@ import kotlinx.coroutines.withContext
 
 class MainViewModel(
     private val repository: TranslationRepository,
-    private val appContext: Context,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): ViewModel() {
-    private val _state = MutableStateFlow<UiState>(UiState.Default)
-    val state = _state.asStateFlow()
+    private val _translationState = MutableStateFlow<TranslationStatus>(TranslationStatus.Default)
+    val translationState = _translationState.asStateFlow()
+    private val _wordToTranslate = MutableStateFlow("")
+    val wordToTranslate = _wordToTranslate.asStateFlow()
     val translations = repository.getAllTranslations()
 
-    fun updateUiState(newState: UiState) {
-        _state.value = newState
+    fun updateWordToTranslate(newWord: String) {
+        _wordToTranslate.value = newWord
+    }
+
+    fun updateUiState(newState: TranslationStatus) {
+        _translationState.value = newState
     }
 
     fun requestNewTranslation(word: String) = viewModelScope.launch {
         if (word.isEmpty()) return@launch
-        updateUiState(newState = UiState.Loading)
+        updateUiState(newState = TranslationStatus.Loading)
         val response = withContext(dispatcher) {
             repository.requestTranslation(word = word)
         }
@@ -39,16 +42,15 @@ class MainViewModel(
                 response.getOrNull()?.let { translations ->
                     val translation = translations.firstOrNull()
                     if (translation == null) {
-                        Toast.makeText(appContext, "No translation found", Toast.LENGTH_LONG).show()
+                        updateUiState(newState = TranslationStatus.TranslationSuccess(translationFound = false))
                     } else {
                         repository.insertTranslation(translation = translation.toTranslationDBO())
+                        updateUiState(newState = TranslationStatus.TranslationSuccess(translationFound = true))
                     }
                 }
-                updateUiState(newState = UiState.TranslationSuccess)
             }
             response.isFailure -> {
-                Toast.makeText(appContext, "Error", Toast.LENGTH_LONG).show()
-                updateUiState(newState = UiState.TranslationFailure)
+                updateUiState(newState = TranslationStatus.TranslationFailure)
             }
         }
     }
@@ -63,10 +65,10 @@ class MainViewModel(
     }
 
 
-    sealed class UiState() {
-        object Default: UiState()
-        object Loading: UiState()
-        object TranslationSuccess: UiState()
-        object TranslationFailure: UiState()
+    sealed class TranslationStatus() {
+        object Default: TranslationStatus()
+        object Loading: TranslationStatus()
+        class TranslationSuccess(val translationFound: Boolean): TranslationStatus()
+        object TranslationFailure: TranslationStatus()
     }
 }

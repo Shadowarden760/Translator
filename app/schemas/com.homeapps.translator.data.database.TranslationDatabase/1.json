@@ -1,0 +1,55 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "79e43459b3f130d396b524c84edd1cb5",
+    "entities": [
+      {
+        "tableName": "Translations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`translation_id` INTEGER NOT NULL, `translation_word` TEXT NOT NULL, `translation_result` TEXT NOT NULL, `translation_favourite` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`translation_id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "translation_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "word",
+            "columnName": "translation_word",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "translation",
+            "columnName": "translation_result",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "favourite",
+            "columnName": "translation_favourite",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "translation_id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '79e43459b3f130d396b524c84edd1cb5')"
+    ]
+  }
+}

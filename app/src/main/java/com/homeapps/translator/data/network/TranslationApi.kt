@@ -1,8 +1,8 @@
 package com.homeapps.translator.data.network
 
-import com.skydoves.retrofit.adapters.result.ResultCallAdapterFactory
 import com.homeapps.translator.BuildConfig
 import com.homeapps.translator.data.network.models.TranslationResponseDTO
+import com.skydoves.retrofit.adapters.result.ResultCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

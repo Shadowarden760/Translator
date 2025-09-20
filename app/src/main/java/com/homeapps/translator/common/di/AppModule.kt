@@ -25,6 +25,6 @@ val appModule = module {
         )
     }
 
-    viewModel { MainViewModel(repository = get(), appContext = androidContext()) }
+    viewModel { MainViewModel(repository = get()) }
     viewModel { FavouritesViewModel(repository = get()) }
 }

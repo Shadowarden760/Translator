@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Переводчик</string>
+    <string name="text_home_section">Главная</string>
+    <string name="text_favourite_section">Избранное</string>
+    <string name="main_text_translate">Перевести…</string>
+    <string name="main_text_no_translation_history">Нет истории перевода</string>
+    <string name="main_text_no_translation_found">Не найден перевод</string>
+    <string name="main_text_error">Ошибка поиска</string>
+    <string name="favourite_text_your_favourite_translations">Избранные переводы</string>
+    <string name="favourite_text_there_are_no_favourite_translations">Избранных переводов нет</string>
+</resources>

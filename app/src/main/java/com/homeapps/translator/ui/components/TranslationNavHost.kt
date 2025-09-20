@@ -14,16 +14,13 @@ fun TranslationNavHost(navController: NavHostController) {
         navController = navController,
         startDestination = NavigationBarSection.Home.routeName,
     ) {
-        val goBack: () -> Unit = {
-            navController.popBackStack()
-        }
 
         composable(AppRoute.Home.routeName) {
             MainScreen()
         }
 
         composable(AppRoute.Favourite.routeName) {
-            FavouritesScreen(goBack = goBack)
+            FavouritesScreen()
         }
     }
 }
