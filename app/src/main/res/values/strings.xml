@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Translator</string>
+
+    <string name="text_home_section">Home</string>
+    <string name="text_favourite_section">Favourite</string>
+
+    <string name="main_text_translate">Translate…</string>
+
+</resources>
